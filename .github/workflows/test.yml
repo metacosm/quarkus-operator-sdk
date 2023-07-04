@@ -29,6 +29,7 @@ jobs:
 
       - name: Create java-operator-plugins pull request
         uses: peter-evans/create-pull-request@v5
+        id: jop-pr
         with:
           path: sdk-plugins
           title: "WIP: Ignore please"
@@ -38,6 +39,13 @@ jobs:
           branch: qosdk-release-${{steps.metadata.outputs.current-version}}
           token: ${{ secrets.QOSDK_BOT_TOKEN }}
           push-to-fork: qosdk-bot/java-operator-plugins
+          delete-branch: true
+    
+      - name: Check outputs
+        if: ${{ steps.jop-pr.outputs.pull-request-number }}
+        run: |
+            echo "Pull Request Number - ${{ steps.jop-pr.outputs.pull-request-number }}"
+            echo "Pull Request URL - ${{ steps.jop-pr.outputs.pull-request-url }}"
 
       - name: Create quarkus-platform pull request
         uses: peter-evans/create-pull-request@v5
@@ -50,3 +58,4 @@ jobs:
           branch: qosdk-release-${{steps.metadata.outputs.current-version}}
           token: ${{ secrets.QOSDK_BOT_TOKEN }}
           push-to-fork: qosdk-bot/quarkus-platform
+          delete-branch: true
