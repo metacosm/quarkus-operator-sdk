@@ -4,14 +4,14 @@ jobs:
     runs-on: ubuntu-latest
     name: test
     steps:
+      - uses: actions/checkout@v3 
+      
       - uses: radcortez/project-metadata-action@main
         name: Retrieve project metadata
         id: metadata
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
           metadata-file-path: '.github/project.yml'
-
-      - uses: actions/checkout@v3
 
       - uses: actions/checkout@v3
         with:
