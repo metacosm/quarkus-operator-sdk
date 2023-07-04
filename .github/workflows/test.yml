@@ -25,8 +25,8 @@ jobs:
         run: |
           pwd
           cd sdk-plugins
-          pwd
-          sed -i '' -e 's|<quarkus-sdk.version>.*</quarkus-sdk.version>|<quarkus-sdk.version>6.2.1</quarkus-sdk.version>|' ./pkg/quarkus/v1alpha/scaffolds/internal/templates/pomxml.go
+          ls $(pwd)/pkg/quarkus/v1alpha/scaffolds/internal/templates/pomxml.go
+          sed -i '' -e 's|<quarkus-sdk.version>.*</quarkus-sdk.version>|<quarkus-sdk.version>6.2.1</quarkus-sdk.version>|' $(pwd)/pkg/quarkus/v1alpha/scaffolds/internal/templates/pomxml.go
 
       - name: Create java-operator-plugins pull request
         uses: peter-evans/create-pull-request@v5
