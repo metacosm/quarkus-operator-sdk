@@ -11,9 +11,8 @@ jobs:
 
       - name: Update QOSDK version to in java-operator-plugins
         run: |
-          pwd
+          which sed
           cd sdk-plugins
-          ls $(pwd)/pkg/quarkus/v1alpha/scaffolds/internal/templates/pomxml.go
           sed -i '' -e 's|<quarkus-sdk.version>.*</quarkus-sdk.version>|<quarkus-sdk.version>6.2.1</quarkus-sdk.version>|' $(pwd)/pkg/quarkus/v1alpha/scaffolds/internal/templates/pomxml.go
           
       - uses: actions/checkout@v3
