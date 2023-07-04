@@ -6,18 +6,6 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
-          repository: quarkusio/quarkus-platform
-          path: quarkus-platform
-
-      - name: Update QOSDK version to in quarkus-platform
-        run: |
-          cd quarkus-platform
-          pwd
-          mvn -B versions:set-property -Dproperty=quarkus-operator-sdk.version -DnewVersion=6.2.1
-          ./mvnw -Dsync
-
-      - uses: actions/checkout@v3
-        with:
           repository: operator-framework/java-operator-plugins
           path: sdk-plugins
 
@@ -27,6 +15,18 @@ jobs:
           cd sdk-plugins
           ls $(pwd)/pkg/quarkus/v1alpha/scaffolds/internal/templates/pomxml.go
           sed -i '' -e 's|<quarkus-sdk.version>.*</quarkus-sdk.version>|<quarkus-sdk.version>6.2.1</quarkus-sdk.version>|' $(pwd)/pkg/quarkus/v1alpha/scaffolds/internal/templates/pomxml.go
+          
+      - uses: actions/checkout@v3
+        with:
+          repository: quarkusio/quarkus-platform
+          path: quarkus-platform
+
+      - name: Update QOSDK version to in quarkus-platform
+        run: |
+          cd quarkus-platform
+          pwd
+          mvn -B versions:set-property -Dproperty=quarkus-operator-sdk.version -DnewVersion=6.2.1
+          ./mvnw -Dsync
 
       - name: Create java-operator-plugins pull request
         uses: peter-evans/create-pull-request@v5
