@@ -13,7 +13,7 @@ jobs:
         run: |
           which sed
           cd sdk-plugins
-          sed -i '' -e 's|<quarkus-sdk.version>.*</quarkus-sdk.version>|<quarkus-sdk.version>6.2.1</quarkus-sdk.version>|' $(pwd)/pkg/quarkus/v1alpha/scaffolds/internal/templates/pomxml.go
+          sed -i -e 's|<quarkus-sdk.version>.*</quarkus-sdk.version>|<quarkus-sdk.version>6.2.1</quarkus-sdk.version>|' $(pwd)/pkg/quarkus/v1alpha/scaffolds/internal/templates/pomxml.go
           
       - uses: actions/checkout@v3
         with:
